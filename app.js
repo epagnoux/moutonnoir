@@ -58,7 +58,19 @@
     }),
     { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
   );
-  document.querySelectorAll(".reveal, .split-title").forEach((el) => io.observe(el));
+  document.querySelectorAll(".reveal, .split-title, .histoire__media").forEach((el) => io.observe(el));
+
+  /* ---------- Gallery horizontal drift on scroll ---------- */
+  const drift = document.querySelector("[data-drift]");
+  if (drift && !prefersReduced) {
+    window.addEventListener("scroll", () => {
+      const r = drift.parentElement.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      const progress = 1 - (r.bottom / (innerHeight + r.height));
+      const max = Math.max(drift.scrollWidth - innerWidth + 64, 0);
+      drift.style.transform = `translateX(${-progress * max * 0.6}px)`;
+    }, { passive: true });
+  }
 
   /* ---------- Count-up facts ---------- */
   const counters = document.querySelectorAll(".fact__num");
@@ -179,6 +191,17 @@
         btn.style.transform = `translate(${x * 0.18}px, ${y * 0.25}px)`;
       });
       btn.addEventListener("pointerleave", () => (btn.style.transform = ""));
+    });
+
+    /* ---------- Subtle 3D tilt on media figures ---------- */
+    document.querySelectorAll("[data-tilt]").forEach((fig) => {
+      fig.addEventListener("pointermove", (e) => {
+        const r = fig.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        fig.style.transform = `perspective(900px) rotateY(${px * 5}deg) rotateX(${-py * 5}deg)`;
+      });
+      fig.addEventListener("pointerleave", () => (fig.style.transform = ""));
     });
   }
 })();

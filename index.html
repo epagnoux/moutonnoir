@@ -7,7 +7,7 @@
 <meta name="description" content="Bistro de terroir sur les rives de la rivière du Gouffre, à Baie-Saint-Paul, Charlevoix. Terrasse au bord de l'eau, feux de foyer, cuisine locale." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300;62..125,400;62..125,500;62..125,600;62..125,700;62..125,800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -21,52 +21,41 @@
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
   <a href="#top" class="nav__brand">
-    <span class="nav__mark">MN</span>
-    <span class="nav__name">Le Mouton&nbsp;Noir</span>
+    <img class="nav__logo" src="assets/logo.png" alt="Le Mouton Noir" />
   </a>
   <nav class="nav__links">
-    <a href="#histoire">L'histoire</a>
-    <a href="#terroir">Terroir</a>
-    <a href="#terrasse">Terrasse</a>
-    <a href="#menu">Menu</a>
-    <a href="#infos">Infos</a>
+    <a href="#histoire">//L'histoire</a>
+    <a href="#terroir">//Terroir</a>
+    <a href="#terrasse">//Terrasse</a>
+    <a href="menu.html">//Menu</a>
+    <a href="#infos">//Infos</a>
   </nav>
-  <a class="btn btn--solid nav__cta" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver</a>
+  <a class="btn btn--outline nav__cta" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver <span class="btn__arrow">→</span></a>
 </header>
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
-  <canvas id="ember-canvas" aria-hidden="true"></canvas>
-  <div class="hero__veil" aria-hidden="true"></div>
-
-  <div class="hero__inner">
-    <p class="hero__eyebrow reveal">Restaurant — Bistro — Terrasse</p>
-    <h1 class="hero__title">
-      <span class="line"><span>Le Mouton</span></span>
-      <span class="line line--indent"><em>Noir</em></span>
-    </h1>
-    <p class="hero__sub reveal">Cuisine de terroir sur les rives de la rivière du Gouffre,<br />au cœur de Baie-Saint-Paul, Charlevoix.</p>
-    <div class="hero__actions reveal">
-      <a class="btn btn--solid" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver une table</a>
-      <a class="btn btn--ghost" href="menu.html">Voir le menu</a>
-    </div>
+  <div class="hero__media" aria-hidden="true">
+    <img src="assets/photo-4.jpg" alt="" data-hero-img />
+    <canvas id="ember-canvas" aria-hidden="true"></canvas>
+    <div class="hero__veil"></div>
   </div>
 
-  <div class="hero__footer">
-    <div class="hero__meta">
-      <span>43, rue Saint-Anne</span>
-      <span class="dot">·</span>
-      <span>Baie-Saint-Paul, QC</span>
-    </div>
-    <a class="hero__scroll" href="#histoire" aria-label="Défiler vers le bas">
-      <span class="hero__scroll-line"></span>
-    </a>
-    <div class="hero__meta hero__meta--right">
-      <span>Mar — Sam</span>
-      <span class="dot">·</span>
-      <span>11h30 – 21h</span>
-    </div>
+  <h1 class="hero__title" aria-label="Le Mouton Noir">
+    <span class="hero__title-line"><span>LE&nbsp;MOUTON</span></span>
+    <span class="hero__title-line hero__title-line--right"><span>NOIR</span></span>
+  </h1>
+
+  <div class="hero__corners">
+    <p class="hero__corner hero__corner--tl reveal">//Restaurant — Bistro — Terrasse<br />Baie-Saint-Paul, Charlevoix</p>
+    <p class="hero__corner hero__corner--br reveal">Là où le terroir rencontre la rivière.<br />Une cuisine guidée par les saisons,<br />les artisans de Charlevoix et le feu.</p>
+    <p class="hero__corner hero__corner--bl reveal">Produits des fermes d'ici, pêches du Saint-Laurent,<br />viandes bio de Charlevoix. Une table honnête,<br />généreuse et vivante — midi et soir.</p>
+    <a class="btn btn--outline hero__cta reveal" href="menu.html">Explorer le menu <span class="btn__arrow">→</span></a>
   </div>
+
+  <a class="hero__scroll" href="#histoire" aria-label="Défiler vers le bas">
+    <span class="hero__scroll-line"></span>
+  </a>
 </section>
 
 <!-- ============ MARQUEE ============ -->
@@ -84,11 +73,21 @@
     <h2 class="section__title split-title">Une table<br /><em>ancrée</em> ici.</h2>
   </div>
   <div class="histoire__grid">
-    <p class="histoire__lead reveal">Atmosphère feutrée, bois, lumière basse — et dehors, la rivière du Gouffre qui glisse sous la terrasse. Le Mouton Noir est un bistro de caractère où Charlevoix se mange, se boit et se raconte.</p>
+    <div class="histoire__col">
+      <p class="histoire__lead reveal">Atmosphère feutrée, bois, lumière basse — et dehors, la rivière du Gouffre qui glisse sous la terrasse. Le Mouton Noir est un bistro de caractère où Charlevoix se mange, se boit et se raconte.</p>
+      <figure class="histoire__media reveal" data-tilt>
+        <img src="assets/photo-salle.jpg" alt="La salle à manger du Mouton Noir — bois, lumière chaude, tables dressées" loading="lazy" />
+        <figcaption>La salle — feutrée &amp; chaleureuse</figcaption>
+      </figure>
+    </div>
     <div class="histoire__facts">
       <div class="fact reveal"><span class="fact__num" data-count="2">0</span><span class="fact__label">services par jour,<br />midi &amp; soir</span></div>
       <div class="fact reveal"><span class="fact__num" data-count="100" data-suffix="%">0</span><span class="fact__label">produits du terroir<br />charlevoisien</span></div>
       <div class="fact reveal"><span class="fact__num" data-count="1">0</span><span class="fact__label">rivière du Gouffre<br />sous la terrasse</span></div>
+      <figure class="histoire__media histoire__media--small reveal" data-tilt>
+        <img src="assets/photo-2.jpg" alt="Plat signature — canard, carottes rôties, jus" loading="lazy" />
+        <figcaption>Assiettes de saison</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -126,12 +125,41 @@
 
 <!-- ============ TERRASSE / BIG IMAGE PANEL ============ -->
 <section class="terrasse" id="terrasse">
-  <div class="terrasse__bg" data-parallax aria-hidden="true"></div>
+  <div class="terrasse__bg" data-parallax aria-hidden="true">
+    <img src="assets/photo-4.jpg" alt="" aria-hidden="true" />
+  </div>
   <div class="terrasse__content">
     <span class="section__index section__index--light">03</span>
     <h2 class="terrasse__title split-title">La terrasse<br /><em>du Gouffre</em></h2>
     <p class="terrasse__text reveal">L'été, on y déjeune au son de l'eau. Le soir, on y dîne à la lueur des feux. C'est simple : c'est ici que Charlevoix est le plus beau.</p>
+    <div class="terrasse__tags reveal">
+      <span class="tag">Bord de l'eau</span>
+      <span class="tag">Feux de foyer</span>
+      <span class="tag">Chauffage extérieur</span>
+    </div>
     <a class="btn btn--light reveal" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver en terrasse</a>
+  </div>
+</section>
+
+<!-- ============ GALERIE SCROLL ============ -->
+<section class="galerie" aria-label="Galerie photos">
+  <div class="galerie__track" data-drift>
+    <figure class="galerie__item">
+      <img src="assets/photo-4.jpg" alt="Terrasse au bord de la rivière du Gouffre avec foyer extérieur" loading="lazy" />
+      <figcaption>Terrasse · bord de l'eau</figcaption>
+    </figure>
+    <figure class="galerie__item">
+      <img src="assets/photo-3.jpg" alt="La salle et le bar, ambiance feutrée" loading="lazy" />
+      <figcaption>Salle · atmosphère feutrée</figcaption>
+    </figure>
+    <figure class="galerie__item">
+      <img src="assets/photo-2.jpg" alt="Assiette signature du Mouton Noir" loading="lazy" />
+      <figcaption>Cuisine · terroir de Charlevoix</figcaption>
+    </figure>
+    <figure class="galerie__item">
+      <img src="assets/photo-salle.jpg" alt="Salle à manger lumineuse en journée" loading="lazy" />
+      <figcaption>Le midi · lumière du jour</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -202,6 +230,7 @@
 <!-- ============ FOOTER CTA ============ -->
 <footer class="footer">
   <div class="footer__cta">
+    <img class="footer__logo reveal" src="assets/logo.png" alt="Logo du Mouton Noir" />
     <h2 class="footer__title split-title">On vous garde<br />une <em>table ?</em></h2>
     <a class="btn btn--solid btn--big reveal" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver en ligne</a>
   </div>
