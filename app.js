@@ -72,25 +72,7 @@
     }, { passive: true });
   }
 
-  /* ---------- Count-up facts ---------- */
-  const counters = document.querySelectorAll(".fact__num");
-  const cio = new IntersectionObserver((entries) => {
-    entries.forEach((en) => {
-      if (!en.isIntersecting) return;
-      cio.unobserve(en.target);
-      const el = en.target;
-      const target = +el.dataset.count;
-      const suffix = el.dataset.suffix || "";
-      const t0 = performance.now(), dur = 1400;
-      (function tick(t) {
-        const p = Math.min((t - t0) / dur, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(target * eased) + suffix;
-        if (p < 1) requestAnimationFrame(tick);
-      })(t0);
-    });
-  }, { threshold: 0.6 });
-  counters.forEach((c) => cio.observe(c));
+  /* ---------- Count-up facts (removed) ---------- */
 
   /* ---------- Parallax on terrasse bg ---------- */
   const para = document.querySelector("[data-parallax]");
@@ -100,85 +82,6 @@
       if (r.bottom < 0 || r.top > innerHeight) return;
       para.style.transform = `translateY(${r.top * -0.12}px)`;
     }, { passive: true });
-  }
-
-  /* ---------- Ember field (shader-style canvas) ---------- */
-  const canvas = document.getElementById("ember-canvas");
-  if (canvas) {
-  const ctx = canvas.getContext("2d");
-  let W, H, dpr;
-  const resize = () => {
-    dpr = Math.min(devicePixelRatio || 1, 2);
-    W = canvas.clientWidth; H = canvas.clientHeight;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  };
-  resize();
-  window.addEventListener("resize", resize);
-
-  const mouse = { x: 0.5, y: 0.5, vx: 0, vy: 0 };
-  window.addEventListener("pointermove", (e) => {
-    const nx = e.clientX / innerWidth, ny = e.clientY / innerHeight;
-    mouse.vx = nx - mouse.x; mouse.vy = ny - mouse.y;
-    mouse.x = nx; mouse.y = ny;
-  });
-
-  // value-noise-ish drift using layered sines (cheap shader look)
-  const EMBERS = Array.from({ length: 90 }, () => ({
-    x: Math.random(), y: Math.random(),
-    r: 0.6 + Math.random() * 2.2,
-    s: 0.00006 + Math.random() * 0.00025,
-    ph: Math.random() * Math.PI * 2,
-    hue: 18 + Math.random() * 20,
-  }));
-
-  let heroVisible = true;
-  new IntersectionObserver(([en]) => (heroVisible = en.isIntersecting)).observe(canvas);
-
-  function drawEmbers(t) {
-    ctx.clearRect(0, 0, W, H);
-
-    // ambient ember glow (radial, follows mouse subtly)
-    const gx = W * (0.5 + (mouse.x - 0.5) * 0.12);
-    const gy = H * (0.72 + (mouse.y - 0.5) * 0.08);
-    const glow = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(W, H) * 0.55);
-    glow.addColorStop(0, "rgba(224,102,42,0.20)");
-    glow.addColorStop(0.4, "rgba(120,60,30,0.10)");
-    glow.addColorStop(1, "rgba(0,0,0,0)");
-    ctx.fillStyle = glow;
-    ctx.fillRect(0, 0, W, H);
-
-    // rising embers
-    ctx.globalCompositeOperation = "lighter";
-    for (const p of EMBERS) {
-      const drift = Math.sin(t * p.s * 40 + p.ph) * 0.02 + mouse.vx * 0.3;
-      p.y -= p.s * 16;
-      p.x += drift * 0.001;
-      if (p.y < -0.05) { p.y = 1.05; p.x = Math.random(); }
-      const flicker = 0.55 + 0.45 * Math.sin(t * 0.004 + p.ph * 3);
-      const x = p.x * W, y = p.y * H;
-      const rad = p.r * (1 + flicker * 0.4);
-      const g = ctx.createRadialGradient(x, y, 0, x, y, rad * 4);
-      g.addColorStop(0, `hsla(${p.hue}, 85%, 60%, ${0.5 * flicker})`);
-      g.addColorStop(1, "hsla(20, 80%, 50%, 0)");
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(x, y, rad * 4, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalCompositeOperation = "source-over";
-
-    mouse.vx *= 0.9; mouse.vy *= 0.9;
-  }
-
-  if (prefersReduced) {
-    drawEmbers(0);
-  } else {
-    (function loop(t) {
-      if (heroVisible) drawEmbers(t);
-      requestAnimationFrame(loop);
-    })(0);
-  }
   }
 
   /* ---------- Magnetic buttons ---------- */
