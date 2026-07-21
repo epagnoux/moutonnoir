@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Le Mouton Noir — Expérience 3D · Test</title>
+<meta name="description" content="Prototype d'interface : le mouton en 3D qui pivote au fil du scroll." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300;62..125,400;62..125,600;62..125,800&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --ink: #f2efe9;
+  --muted: rgba(242,239,233,.55);
+  --bg: #0d0d0c;
+  --accent: #c8b28a;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Archivo', sans-serif;
+  overflow-x: hidden;
+}
+::selection { background: var(--accent); color: var(--bg); }
+
+/* ============ CANVAS FIXE ============ */
+#scene {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+#scene canvas { display: block; }
+
+/* ============ NAV ============ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 2.5rem;
+  mix-blend-mode: difference;
+}
+.nav__brand {
+  font-family: 'Space Mono', monospace;
+  font-size: .8rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav__links { display: flex; gap: 2rem; }
+.nav__links a {
+  font-family: 'Space Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .1em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .3s;
+}
+.nav__links a:hover { color: var(--ink); }
+@media (max-width: 700px) { .nav__links { display: none; } }
+
+/* ============ SECTIONS ============ */
+main { position: relative; z-index: 2; }
+.panel {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 6vw;
+}
+.panel__inner { max-width: 34rem; }
+.panel:nth-of-type(even) .panel__inner { margin-left: auto; text-align: right; }
+.panel:nth-of-type(even) .dish { flex-direction: row-reverse; }
+
+.panel__index {
+  font-family: 'Space Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .3em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 1.2rem;
+}
+.panel__title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -.01em;
+  margin-bottom: 1.6rem;
+}
+.panel__title em { font-style: italic; color: var(--accent); }
+.panel__text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+.panel__cta {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: .75rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid rgba(242,239,233,.3);
+  padding: .9rem 1.6rem;
+  border-radius: 99px;
+  transition: background .3s, color .3s;
+}
+.panel__cta:hover { background: var(--ink); color: var(--bg); }
+
+/* Cartes terroir */
+.mini-cards { display: grid; gap: 1rem; }
+.mini-card {
+  border: 1px solid rgba(242,239,233,.12);
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem;
+  background: rgba(13,13,12,.55);
+  backdrop-filter: blur(8px);
+}
+.mini-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .3rem; }
+.mini-card p { font-size: .85rem; color: var(--muted); line-height: 1.55; font-weight: 300; }
+
+/* Plats */
+.dishes { list-style: none; }
+.dish {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: .9rem 0;
+  border-bottom: 1px solid rgba(242,239,233,.1);
+}
+.dish__name { font-weight: 600; font-size: .98rem; }
+.dish__name span { display: block; font-weight: 300; font-size: .8rem; color: var(--muted); margin-top: .2rem; }
+.dish__dots { flex: 1; border-bottom: 1px dotted rgba(242,239,233,.25); transform: translateY(-4px); }
+.dish__price { font-family: 'Space Mono', monospace; font-size: .85rem; color: var(--accent); }
+
+/* Infos */
+.infos__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+.infos__grid h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .5rem;
+}
+.infos__grid p { font-size: .9rem; line-height: 1.65; color: var(--muted); font-weight: 300; }
+.infos__grid a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(242,239,233,.25); }
+
+/* Footer */
+.footer {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 6vw 3rem;
+  position: relative;
+  z-index: 2;
+}
+.footer__title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  line-height: 1.05;
+  margin-bottom: 2.5rem;
+}
+.footer__title em { font-style: italic; color: var(--accent); }
+.footer__bar {
+  position: absolute;
+  bottom: 2rem; left: 6vw; right: 6vw;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .12em;
+  color: var(--muted);
+}
+
+/* Hint scroll */
+.scroll-hint {
+  position: fixed;
+  bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  font-family: 'Space Mono', monospace;
+  font-size: .65rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  animation: hint 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes hint { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,8px); } }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* ============ PANNEAU D'ÉDITION ============ */
+.devpanel {
+  position: fixed;
+  top: 4.5rem; right: 1rem;
+  z-index: 20;
+  width: 290px;
+  background: rgba(20,20,19,.92);
+  border: 1px solid rgba(242,239,233,.15);
+  border-radius: 12px;
+  padding: 1rem;
+  font-family: 'Space Mono', monospace;
+  font-size: .68rem;
+  color: var(--ink);
+  backdrop-filter: blur(10px);
+  display: none;
+}
+.devpanel.is-open { display: block; }
+.devpanel h2 {
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .7rem;
+}
+.devpanel .row { display: flex; justify-content: space-between; gap: .5rem; padding: .18rem 0; }
+.devpanel .row span:last-child { color: var(--accent); }
+.devpanel .section-name {
+  background: rgba(200,178,138,.12);
+  border-radius: 6px;
+  padding: .35rem .5rem;
+  margin-bottom: .6rem;
+  color: var(--accent);
+  letter-spacing: .1em;
+}
+.devpanel button {
+  width: 100%;
+  margin-top: .5rem;
+  background: transparent;
+  border: 1px solid rgba(242,239,233,.3);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: .65rem;
+  letter-spacing: .1em;
+  padding: .5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.devpanel button:hover { background: var(--ink); color: var(--bg); }
+.devpanel textarea {
+  width: 100%;
+  height: 120px;
+  margin-top: .6rem;
+  background: #000;
+  color: #9f9;
+  border: 1px solid rgba(242,239,233,.2);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: .58rem;
+  padding: .5rem;
+  resize: vertical;
+}
+.devpanel .hint { color: var(--muted); line-height: 1.6; margin-top: .5rem; }
+.devpanel .slider-row { display: flex; align-items: center; gap: .5rem; padding: .18rem 0; font-size: .65rem; }
+.devpanel .slider-row span:first-child { width: 3rem; flex-shrink: 0; }
+.devpanel .slider-row .sv { width: 2.6rem; text-align: right; color: var(--accent); flex-shrink: 0; }
+.devpanel .slider-row input[type="range"] { flex: 1; height: 4px; -webkit-appearance: none; appearance: none; background: rgba(242,239,233,.18); border-radius: 99px; outline: none; }
+.devpanel .slider-row input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); cursor: pointer; }
+.dev-toggle {
+  position: fixed;
+  bottom: 1.2rem; right: 1.2rem;
+  z-index: 21;
+  background: rgba(20,20,19,.9);
+  border: 1px solid rgba(200,178,138,.5);
+  color: var(--accent);
+  font-family: 'Space Mono', monospace;
+  font-size: .65rem;
+  letter-spacing: .15em;
+  padding: .6rem 1rem;
+  border-radius: 99px;
+  cursor: pointer;
+}
+body.editing #scene { pointer-events: auto; cursor: grab; }
+body.editing #scene:active { cursor: grabbing; }
+body.editing main, body.editing .footer { pointer-events: none; }
+</style>
+</head>
+<body>
+
+<div id="scene" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="index.html" class="nav__brand">← Le Mouton Noir</a>
+  <nav class="nav__links">
+    <a href="#histoire">//Histoire</a>
+    <a href="#terroir">//Terroir</a>
+    <a href="#menu">//Menu</a>
+    <a href="#infos">//Infos</a>
+    <a href="menu.html">//Carte</a>
+  </nav>
+</header>
+
+<main>
+  <!-- 00 · HERO -->
+  <section class="panel" id="top" data-rot="0,-0.15,0">
+    <div class="panel__inner">
+      <span class="panel__index reveal">//Prototype 3D</span>
+      <h1 class="panel__title reveal">Le Mouton<br /><em>Noir.</em></h1>
+      <p class="panel__text reveal">Bistro de terroir sur les rives de la rivière du Gouffre, Baie-Saint-Paul. Scrollez — le mouton pivote avec vous.</p>
+      <a class="panel__cta reveal" href="#histoire">Descendre ↓</a>
+    </div>
+  </section>
+
+  <!-- 01 · HISTOIRE -->
+  <section class="panel" id="histoire" data-rot="0.4,1.8,0">
+    <div class="panel__inner">
+      <span class="panel__index reveal">01</span>
+      <h2 class="panel__title reveal">Une table<br /><em>ancrée</em> ici.</h2>
+      <p class="panel__text reveal">Atmosphère feutrée, bois, lumière basse — et dehors, la rivière du Gouffre qui glisse sous la terrasse. Un bistro de caractère où Charlevoix se mange, se boit et se raconte.</p>
+    </div>
+  </section>
+
+  <!-- 02 · TERROIR -->
+  <section class="panel" id="terroir" data-rot="-0.3,3.6,0.15">
+    <div class="panel__inner">
+      <span class="panel__index reveal">02</span>
+      <h2 class="panel__title reveal">Le terroir,<br /><em>à la table.</em></h2>
+      <div class="mini-cards">
+        <div class="mini-card reveal"><h3>♨ Cuisine de Charlevoix</h3><p>Agneau braisé, omble de Gaspésie, viandes bio, fromages locaux.</p></div>
+        <div class="mini-card reveal"><h3>≈ Terrasse sur l'eau</h3><p>Au-dessus de la rivière du Gouffre, de mai à octobre.</p></div>
+        <div class="mini-card reveal"><h3>✦ Feux de foyer</h3><p>Braseros et veillées, même quand la fraîcheur descend du fleuve.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · MENU -->
+  <section class="panel" id="menu" data-rot="0.2,5.2,-0.1">
+    <div class="panel__inner">
+      <span class="panel__index reveal">04</span>
+      <h2 class="panel__title reveal">Quelques<br /><em>signatures.</em></h2>
+      <ul class="dishes">
+        <li class="dish reveal"><div class="dish__name">Tartare d'omble de Gaspésie<span>frites maison</span></div><div class="dish__dots"></div><div class="dish__price">31 $</div></li>
+        <li class="dish reveal"><div class="dish__name">Orecchiette à l'agneau braisé<span>jus d'agneau, pois verts, parmesan</span></div><div class="dish__dots"></div><div class="dish__price">28 $</div></li>
+        <li class="dish reveal"><div class="dish__name">Planche du Mouton<span>charcuteries bio &amp; fromages locaux</span></div><div class="dish__dots"></div><div class="dish__price">33 $</div></li>
+        <li class="dish reveal"><div class="dish__name">Le Légendaire gâteau aux carottes<span>celui dont tout Charlevoix parle</span></div><div class="dish__dots"></div><div class="dish__price">12 $</div></li>
+      </ul>
+      <br />
+      <a class="panel__cta reveal" href="menu.html">Menu complet →</a>
+    </div>
+  </section>
+
+  <!-- 05 · INFOS -->
+  <section class="panel" id="infos" data-rot="-0.15,6.8,0">
+    <div class="panel__inner">
+      <span class="panel__index reveal">05</span>
+      <h2 class="panel__title reveal">Nous<br /><em>trouver.</em></h2>
+      <div class="infos__grid">
+        <div class="reveal"><h3>Adresse</h3><p><a href="https://www.google.com/maps/dir//43+Rue+Saint-Anne,+Baie-Saint-Paul,+QC" target="_blank" rel="noopener">43, rue Saint-Anne<br />Baie-Saint-Paul, QC</a></p></div>
+        <div class="reveal"><h3>Heures</h3><p>Mar – Sam<br />11h30 – 14h · 17h30 – 21h</p></div>
+        <div class="reveal"><h3>Contact</h3><p><a href="tel:+14182403030">+1 (418) 240-3030</a><br /><a href="mailto:info@moutonnoirresto.com">info@moutonnoirresto.com</a></p></div>
+        <div class="reveal"><h3>Suivre</h3><p><a href="https://www.facebook.com/Mouton-Noir-Resto-218626921493224/" target="_blank" rel="noopener">Facebook</a></p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" data-rot="0,8.2,0">
+  <h2 class="footer__title reveal">On vous garde<br />une <em>table ?</em></h2>
+  <a class="panel__cta reveal" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver en ligne</a>
+  <div class="footer__bar"><span>© 2026 Le Mouton Noir</span><span>Baie-Saint-Paul · Charlevoix</span></div>
+</footer>
+
+<div class="scroll-hint" id="hint">Scroll</div>
+
+<button class="dev-toggle" id="devToggle">⚙ Éditer la 3D</button>
+<aside class="devpanel" id="devPanel" aria-label="Panneau d'édition 3D">
+  <h2>// Réglages mouton</h2>
+  <div class="section-name" id="dpSection">Section : —</div>
+  <div class="slider-row"><span>rot X</span><input type="range" id="sRx" min="-10" max="10" step="0.01" value="0" /><span class="sv" id="dpRx">0.00</span></div>
+  <div class="slider-row"><span>rot Y</span><input type="range" id="sRy" min="-10" max="10" step="0.01" value="0" /><span class="sv" id="dpRy">0.00</span></div>
+  <div class="slider-row"><span>rot Z</span><input type="range" id="sRz" min="-10" max="10" step="0.01" value="0" /><span class="sv" id="dpRz">0.00</span></div>
+  <div class="slider-row"><span>pos X</span><input type="range" id="sPx" min="-3" max="3" step="0.01" value="0" /><span class="sv" id="dpPx">0.00</span></div>
+  <div class="slider-row"><span>pos Y</span><input type="range" id="sPy" min="-3" max="3" step="0.01" value="0" /><span class="sv" id="dpPy">0.00</span></div>
+  <div class="slider-row"><span>zoom</span><input type="range" id="sZ" min="0.3" max="3" step="0.01" value="1" /><span class="sv" id="dpZ">1.00</span></div>
+  <button id="dpSave">◈ Enregistrer pour cette section</button>
+  <button id="dpExport">⇩ Exporter le JSON</button>
+  <button id="dpReset">↺ Réinitialiser la section</button>
+  <textarea id="dpOut" readonly placeholder="Le JSON exporté apparaîtra ici…"></textarea>
+  <p class="hint">Mode édition :<br />· glisser = pivoter<br />· clic droit + glisser = déplacer<br />· molette (sur le mouton) = zoom<br />Enregistre chaque section, puis exporte et envoie-moi le JSON.</p>
+</aside>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js" } }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+/* ============ SCÈNE ============ */
+const container = document.getElementById('scene');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 100);
+camera.position.set(0, 0.3, 10.5);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+/* Lumières */
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+const key = new THREE.DirectionalLight(0xfff2dd, 1.4);
+key.position.set(3, 4, 5);
+scene.add(key);
+const rim = new THREE.DirectionalLight(0xc8b28a, 0.9);
+rim.position.set(-4, 2, -3);
+scene.add(rim);
+
+/* ============ MOUTON ============ */
+const sheep = new THREE.Group();
+scene.add(sheep);
+
+const woolMat = new THREE.MeshStandardMaterial({ color: 0x17171a, roughness: 0.95 });
+const creamMat = new THREE.MeshStandardMaterial({ color: 0xf0ece2, roughness: 0.6 });
+const faceMat = new THREE.MeshStandardMaterial({ color: 0x3a3a3e, roughness: 0.5, metalness: 0.1 });
+
+/* Corps : sphère principale + touffes de laine */
+const body = new THREE.Mesh(new THREE.SphereGeometry(1.45, 48, 48), woolMat);
+body.scale.set(1.05, 0.95, 1.15);
+sheep.add(body);
+
+const tuft = new THREE.SphereGeometry(0.42, 24, 24);
+for (let i = 0; i < 46; i++) {
+  const m = new THREE.Mesh(tuft, woolMat);
+  const t = Math.acos(2 * Math.random() - 1);
+  const p = Math.random() * Math.PI * 2;
+  const r = 1.32;
+  m.position.set(
+    Math.sin(t) * Math.cos(p) * r * 1.05,
+    Math.cos(t) * r * 0.92,
+    Math.sin(t) * Math.sin(p) * r * 1.15
+  );
+  const s = 0.7 + Math.random() * 0.8;
+  m.scale.setScalar(s);
+  sheep.add(m);
+}
+
+/* Tête : bloc rectangulaire arrondi (comme l'image) */
+const head = new THREE.Mesh(new THREE.BoxGeometry(0.85, 1.35, 0.6), faceMat);
+head.position.set(0, 0.15, 1.55);
+head.rotation.x = -0.08;
+sheep.add(head);
+
+/* Museau souriant : petit tore noir */
+const smile = new THREE.Mesh(
+  new THREE.TorusGeometry(0.16, 0.035, 12, 24, Math.PI),
+  new THREE.MeshStandardMaterial({ color: 0x0a0a0a, roughness: 0.4 })
+);
+smile.position.set(0, -0.25, 1.87);
+smile.rotation.x = Math.PI;
+sheep.add(smile);
+
+/* Yeux */
+const eyeGeo = new THREE.SphereGeometry(0.055, 12, 12);
+const eyeMat = new THREE.MeshStandardMaterial({ color: 0xf0ece2 });
+[-0.2, 0.2].forEach(x => {
+  const e = new THREE.Mesh(eyeGeo, eyeMat);
+  e.position.set(x, 0.35, 1.86);
+  sheep.add(e);
+});
+
+/* Cornes en spirale : courbe de Tori enroulés */
+function horn(side) {
+  const pts = [];
+  for (let i = 0; i <= 60; i++) {
+    const t = i / 60;
+    const angle = t * Math.PI * 3.2;
+    const rad = 0.55 * (1 - t * 0.45);
+    pts.push(new THREE.Vector3(
+      side * (0.55 + Math.cos(angle) * rad),
+      0.9 + Math.sin(angle) * rad,
+      0.55 - t * 0.35
+    ));
+  }
+  const curve = new THREE.CatmullRomCurve3(pts);
+  return new THREE.Mesh(new THREE.TubeGeometry(curve, 80, 0.075, 12, false), creamMat);
+}
+sheep.add(horn(1), horn(-1));
+
+/* Pattes */
+const legGeo = new THREE.CylinderGeometry(0.1, 0.085, 1.1, 16);
+[[-0.7, 0.65], [0.7, 0.65], [-0.7, -0.65], [0.7, -0.65]].forEach(([x, z]) => {
+  const leg = new THREE.Mesh(legGeo, creamMat);
+  leg.position.set(x, -1.55, z);
+  sheep.add(leg);
+});
+
+sheep.scale.setScalar(0.8);
+sheep.position.y = 0.1;
+
+/* ============ POSES PAR SECTION ============ */
+/* rx,ry,rz = rotation (rad) · px,py = position · z = zoom (échelle) */
+const defaultPoses = {
+  top:      { rx: 0.118,  ry: -0.578, rz: 0,    px: 1.26, py: 1.38, z: 2.09 },
+  histoire: { rx: 0.4,    ry: 1.8,    rz: 0,    px: 0,    py: 0.1,  z: 1    },
+  terroir:  { rx: 0.499,  ry: 4.102,  rz: 0.15, px: 3,    py: 0.1,  z: 2.77 },
+  menu:     { rx: 0.042,  ry: 0.75,   rz: 0.08, px: -3,   py: 1.66, z: 2.58 },
+  infos:    { rx: -0.148, ry: 5.886,  rz: 0,    px: 1.71, py: 0.1,  z: 3    },
+  footer:   { rx: 0,      ry: 8.2,    rz: 0,    px: 0,    py: 0.1,  z: 1    }
+};
+/* Overrides enregistrés en mode édition (persistés dans le navigateur) */
+const savedPoses = JSON.parse(localStorage.getItem('sheepPoses') || '{}');
+const poses = { ...defaultPoses, ...savedPoses };
+
+const sections = [...document.querySelectorAll('[data-rot]')].map(el => ({
+  id: el.id || 'footer',
+  el
+}));
+
+/* Transition continue au scroll — interpolation entre les poses */
+const current = { ...poses.top };
+let activeId = 'top';
+
+function getProgress() {
+  const viewMid = scrollY + innerHeight / 2;
+  let idx = 0;
+  for (let i = 0; i < sections.length; i++) {
+    if (sections[i].el.offsetTop <= viewMid) idx = i;
+  }
+  const cur = sections[idx];
+  const nxt = sections[Math.min(idx + 1, sections.length - 1)];
+  activeId = cur.id;
+
+  const curTop = cur.el.offsetTop;
+  const nxtTop = nxt.el.offsetTop;
+  const range = nxtTop - curTop;
+  const pos = (viewMid - curTop) / (range || 1);
+  const progress = Math.min(1, Math.max(0, pos));
+
+  return { cur: cur.id, nxt: nxt.id, progress };
+}
+
+function onScroll() {
+  const { cur, nxt, progress } = getProgress();
+  const pA = poses[cur];
+  const pB = poses[nxt];
+  const t = progress; // 0 → 1 dans la section courante
+
+  // Ease-in-out sur le progrès
+  const e = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+  for (const k of ['rx','ry','rz','px','py','z']) {
+    current[k] = pA[k] + (pB[k] - pA[k]) * e;
+  }
+
+  const hint = document.getElementById('hint');
+  if (hint) hint.style.opacity = scrollY > 80 ? 0 : 1;
+  updatePanel();
+}
+addEventListener('scroll', onScroll, { passive: true });
+
+/* Légère oscillation de vie + parallaxe souris */
+let mx = 0, my = 0;
+addEventListener('pointermove', e => {
+  mx = (e.clientX / innerWidth - 0.5);
+  my = (e.clientY / innerHeight - 0.5);
+});
+
+/* Reveal on scroll */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => en.isIntersecting && en.target.classList.add('is-visible'));
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* Mode édition (déclaré avant la boucle d'animation) */
+let editing = false;
+
+/* Boucle */
+const clock = new THREE.Clock();
+(function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  const breathe = editing ? 0 : Math.sin(t * 1.2) * 0.05;
+  sheep.rotation.x = current.rx + (editing ? 0 : Math.sin(t * 0.8) * 0.03 + my * 0.15);
+  sheep.rotation.y = current.ry + (editing ? 0 : mx * 0.25);
+  sheep.rotation.z = current.rz;
+  sheep.position.x = current.px;
+  sheep.position.y = current.py + breathe;
+  sheep.scale.setScalar(0.8 * current.z);
+
+  renderer.render(scene, camera);
+})();
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+/* ============ MODE ÉDITION ============ */
+const devPanel = document.getElementById('devPanel');
+const devToggle = document.getElementById('devToggle');
+const $ = id => document.getElementById(id);
+
+devToggle.addEventListener('click', () => {
+  editing = !editing;
+  document.body.classList.toggle('editing', editing);
+  devPanel.classList.toggle('is-open', editing);
+  devToggle.textContent = editing ? '✕ Quitter l\'édition' : '⚙ Éditer la 3D';
+  if (editing) {
+    // on gèle la pose courante dans la section active
+    poses[activeId] = { ...current };
+  } else {
+    onScroll();
+  }
+  updatePanel();
+});
+
+/* Manipulation directe sur le canvas */
+const cvs = renderer.domElement;
+let dragging = false, panning = false, lx = 0, ly = 0;
+
+cvs.addEventListener('pointerdown', e => {
+  if (!editing) return;
+  dragging = true;
+  panning = (e.button === 2 || e.shiftKey);
+  lx = e.clientX; ly = e.clientY;
+  cvs.setPointerCapture(e.pointerId);
+});
+cvs.addEventListener('contextmenu', e => editing && e.preventDefault());
+cvs.addEventListener('pointermove', e => {
+  if (!editing || !dragging) return;
+  const dx = e.clientX - lx, dy = e.clientY - ly;
+  lx = e.clientX; ly = e.clientY;
+  if (panning) {
+    current.px += dx * 0.008;
+    current.py -= dy * 0.008;
+  } else {
+    current.ry += dx * 0.008;
+    current.rx += dy * 0.008;
+  }
+  updatePanel();
+});
+cvs.addEventListener('pointerup', () => { dragging = false; panning = false; });
+cvs.addEventListener('wheel', e => {
+  if (!editing) return;
+  e.preventDefault();
+  current.z = Math.min(3, Math.max(0.3, current.z - e.deltaY * 0.0012));
+  updatePanel();
+}, { passive: false });
+
+/* Panneau : affichage + actions */
+function updatePanel() {
+  if (!devPanel.classList.contains('is-open')) return;
+  $('dpSection').textContent = 'Section : ' + activeId;
+  const vals = [
+    ['sRx','dpRx', current.rx],
+    ['sRy','dpRy', current.ry],
+    ['sRz','dpRz', current.rz],
+    ['sPx','dpPx', current.px],
+    ['sPy','dpPy', current.py],
+    ['sZ', 'dpZ',  current.z]
+  ];
+  for (const [sId, dId, v] of vals) {
+    $(sId).value = v;
+    $(dId).textContent = (+v).toFixed(2);
+  }
+}
+
+/* Sliders → current */
+['sRx','sRy','sRz','sPx','sPy','sZ'].forEach(id => {
+  $(id).addEventListener('input', () => {
+    const val = +$(id).value;
+    const map = { sRx:'rx', sRy:'ry', sRz:'rz', sPx:'px', sPy:'py', sZ:'z' };
+    current[map[id]] = val;
+    updatePanel();
+  });
+});
+
+$('dpSave').addEventListener('click', () => {
+  poses[activeId] = {
+    rx: +current.rx.toFixed(3), ry: +current.ry.toFixed(3), rz: +current.rz.toFixed(3),
+    px: +current.px.toFixed(3), py: +current.py.toFixed(3), z: +current.z.toFixed(3)
+  };
+  localStorage.setItem('sheepPoses', JSON.stringify(poses));
+  flash($('dpSave'), '✓ Enregistré !');
+});
+
+$('dpReset').addEventListener('click', () => {
+  poses[activeId] = { ...defaultPoses[activeId] };
+  Object.assign(current, poses[activeId]);
+  localStorage.setItem('sheepPoses', JSON.stringify(poses));
+  flash($('dpReset'), '↺ Réinitialisé !');
+  updatePanel();
+});
+
+$('dpExport').addEventListener('click', () => {
+  const out = document.getElementById('dpOut');
+  out.value = JSON.stringify(poses, null, 2);
+  out.select();
+  navigator.clipboard?.writeText(out.value).catch(() => {});
+  flash($('dpExport'), '✓ Copié !');
+});
+
+function flash(btn, msg) {
+  const old = btn.textContent;
+  btn.textContent = msg;
+  setTimeout(() => btn.textContent = old, 1200);
+}
+
+onScroll();
+</script>
+</body>
+</html>
