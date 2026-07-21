@@ -12,7 +12,7 @@ body
 ├── header.nav#nav
 │   ├── a.nav__brand            → #top
 │   │   └── img.nav__logo       assets/logo.png (carré)
-│   ├── nav.nav__links          //L'histoire //Terroir //Terrasse //Menu(→menu.html) //Infos
+│   ├── nav.nav__links          // L'histoire // Terroir // Terrasse // Menu(→menu.html) // Infos
 │   └── a.btn.btn--outline.nav__cta   « Réserver → » (Libro, externe)
 │
 ├── section.hero#top
@@ -23,13 +23,13 @@ body
 │   │   ├── .hero__title-line > span        « LE MOUTON »
 │   │   └── .hero__title-line--right > span « NOIR » (outline)
 │   ├── .hero__corners
-│   │   ├── p.hero__corner--tl   //Restaurant — Bistro — Terrasse / Baie-Saint-Paul
+│   │   ├── p.hero__corner--tl   // Restaurant — Bistro — Terrasse / Baie-Saint-Paul
 │   │   └── p.hero__corner--bl   texte produits locaux
 │   └── .hero__strip            (4 × .hero__strip-item : label + valeur)
-│       ├── a  //La carte   → menu.html
-│       ├── div //Horaires  Mar – Sam · 11h30–14h / 17h30–21h
-│       ├── a  //Adresse    → Google Maps
-│       └── a  //Contact    → tel:+14182403030
+│       ├── a  // La carte   → menu.html
+│       ├── div // Horaires  Mar – Sam · 11h30–14h / 17h30–21h
+│       ├── a  // Adresse    → Google Maps
+│       └── a  // Contact    → tel:+14182403030
 │
 ├── section.section.histoire#histoire
 │   ├── .section__head : span.section__index « 01 » + h2.section__title.split-title
@@ -72,7 +72,7 @@ body.menu-page
 ├── header.nav.is-scrolled   (identique, liens → index.html#…)
 │
 ├── section.menu-hero        (fond photo-3.jpg via ::before)
-│   ├── p.menu-hero__eyebrow   //Baie-Saint-Paul · Charlevoix
+│   ├── p.menu-hero__eyebrow   // Baie-Saint-Paul · Charlevoix
 │   ├── h1.menu-hero__title.split-title   « LA carte »
 │   ├── p.menu-hero__sub
 │   ├── .menu-toggle (role=tablist)
@@ -90,7 +90,7 @@ body.menu-page
 │   └── 3 × section.menu-cat (même structure)
 │
 ├── .menu-bar                 (sticky flottante, cachée tant que scroll < 420 px)
-│   ├── .menu-bar__label      //Le Mouton Noir
+│   ├── .menu-bar__label      // Le Mouton Noir
 │   └── .menu-bar__actions    lien « Menu » + .btn--outline « Réserver → »
 │
 ├── section.menu-foot         note + .btn--big « Réserver une table »

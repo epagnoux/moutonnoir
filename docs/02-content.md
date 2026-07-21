@@ -1,14 +1,14 @@
 # 02 — Contenu éditorial (français)
 
-Tout le texte du site, section par section. Les libellés `//xx` utilisent la convention
-typographique du design (préfixe `//`).
+Tout le texte du site, section par section. Les libellés `// xx` utilisent la convention
+typographique du design (préfixe `// `).
 
 ---
 
 ## Navigation (les 2 pages)
 
 - Logo (image) — lien retour accueil
-- Liens : `//L'histoire` · `//Terroir` · `//Terrasse` · `//Menu` · `//Infos`
+- Liens : `// L'histoire` · `// Terroir` · `// Terrasse` · `// Menu` · `// Infos`
 - Bouton : `Réserver →` (lien Libro externe, nouvel onglet)
 
 ---
@@ -19,7 +19,7 @@ typographique du design (préfixe `//`).
 
 - Titre géant (2 lignes) : `LE MOUTON` / `NOIR` (2e ligne en contour, alignée à droite)
 - Bloc coin haut-gauche :
-  > //Restaurant — Bistro — Terrasse
+  > // Restaurant — Bistro — Terrasse
   > Baie-Saint-Paul, Charlevoix
 - Bloc coin bas-gauche :
   > Produits des fermes d'ici, pêches du Saint-Laurent,
@@ -30,10 +30,10 @@ typographique du design (préfixe `//`).
 
 | Libellé | Valeur | Lien |
 |---|---|---|
-| //La carte | Voir les plats → | `menu.html` |
-| //Horaires | Mar – Sam · 11h30 – 14h / 17h30 – 21h | — |
-| //Adresse | 43, rue Saint-Anne, Baie-Saint-Paul | Google Maps |
-| //Contact | +1 (418) 240-3030 | `tel:` |
+| // La carte | Voir les plats → | `menu.html` |
+| // Horaires | Mar – Sam · 11h30 – 14h / 17h30 – 21h | — |
+| // Adresse | 43, rue Saint-Anne, Baie-Saint-Paul | Google Maps |
+| // Contact | +1 (418) 240-3030 | `tel:` |
 
 ### 01 // Une table ancrée ici (Histoire)
 
@@ -95,12 +95,12 @@ typographique du design (préfixe `//`).
 
 ## PAGE MENU
 
-- Eyebrow : `//Baie-Saint-Paul · Charlevoix`
+- Eyebrow : `// Baie-Saint-Paul · Charlevoix`
 - Titre : `LA carte` (« carte » en italique braise)
 - Sous-titre : « Une cuisine de terroir qui suit les saisons et les artisans de Charlevoix. »
 - Toggle : `Menu Midi` / `Menu Soir`
-- Filtres : `//Tout` `//Entrées` `//Plats` `//Desserts`
+- Filtres : `// Tout` `// Entrées` `// Plats` `// Desserts`
 - Pied de page menu : « Le menu est sujet à changement sans préavis · taxes et service en sus » + bouton `Réserver une table`
-- Barre sticky : `//Le Mouton Noir` · lien `Menu` · bouton `Réserver →`
+- Barre sticky : `// Le Mouton Noir` · lien `Menu` · bouton `Réserver →`
 - Footer : `© 2026 Le Mouton Noir` · `← Retour à l'accueil`
 - **Le contenu des plats : voir `06-menu-data.md`** (source contractuelle)
