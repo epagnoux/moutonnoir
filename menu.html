@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Menu — Le Mouton Noir · Baie-Saint-Paul</title>
+<meta name="description" content="Menu midi et menu soir du Mouton Noir — cuisine de terroir de Charlevoix à Baie-Saint-Paul." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body class="menu-page">
+
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav is-scrolled" id="nav">
+  <a href="index.html" class="nav__brand">
+    <span class="nav__mark">MN</span>
+    <span class="nav__name">Le Mouton&nbsp;Noir</span>
+  </a>
+  <nav class="nav__links">
+    <a href="index.html#histoire">L'histoire</a>
+    <a href="index.html#terroir">Terroir</a>
+    <a href="index.html#terrasse">Terrasse</a>
+    <a href="menu.html" aria-current="page">Menu</a>
+    <a href="index.html#infos">Infos</a>
+  </nav>
+  <a class="btn btn--solid nav__cta" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver</a>
+</header>
+
+<!-- ============ MENU HEADER ============ -->
+<section class="menu-hero">
+  <p class="hero__eyebrow reveal">Baie-Saint-Paul · Charlevoix</p>
+  <h1 class="menu-hero__title split-title">La <em>carte</em></h1>
+  <p class="hero__sub reveal">Une cuisine de terroir qui suit les saisons et les artisans de Charlevoix.</p>
+
+  <div class="menu-toggle reveal" role="tablist" aria-label="Choix du menu">
+    <button class="menu-toggle__btn is-active" role="tab" aria-selected="true" data-menu="midi">Menu Midi</button>
+    <button class="menu-toggle__btn" role="tab" aria-selected="false" data-menu="soir">Menu Soir</button>
+    <span class="menu-toggle__pill" aria-hidden="true"></span>
+  </div>
+</section>
+
+<!-- ============ MENU MIDI ============ -->
+<main class="menu-body" id="menu-midi" data-menu-panel="midi">
+  <section class="menu-cat">
+    <h2 class="menu-cat__title split-title"><em>Entrées</em></h2>
+    <ul class="dishes">
+      <li class="dish reveal"><div class="dish__name">Frites et mayo maison</div><div class="dish__dots"></div><div class="dish__price">8 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Gaspacho du Mouton <span>sorbet concombres, croûton de tapenade d'olives</span></div><div class="dish__dots"></div><div class="dish__price">12 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Pâté de campagne maison <span>moutarde de cassis et condiments</span></div><div class="dish__dots"></div><div class="dish__price">13 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Inspiration de tomates de Charlevoix <span>croûtons, concombres, olives, basilic, roquette, Tomme d'Elles, réduction balsamique</span></div><div class="dish__dots"></div><div class="dish__price">15 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Jambon séché des Viandes Bio <span>melon d'eau, basilic, roquette</span></div><div class="dish__dots"></div><div class="dish__price">16 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Inspiration des rivages du Saint-Laurent <span>moules, crevettes nordiques, tomates, pommes de terre, sauce Romesco aux pistaches, crème soubise au safran, croûtons aux herbes, roquette, vinaigrette au Xérès et Coppa bio</span></div><div class="dish__dots"></div><div class="dish__price">18 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Tartare d'omble de Gaspésie</div><div class="dish__dots"></div><div class="dish__price">22 $</div></li>
+    </ul>
+  </section>
+
+  <section class="menu-cat">
+    <h2 class="menu-cat__title split-title"><em>Plats</em></h2>
+    <ul class="dishes">
+      <li class="dish reveal"><div class="dish__name">Sandwich de poulet bio confit de Charlevoix <span>mayonnaise à l'estragon, champignons, lardons, salade verte</span></div><div class="dish__dots"></div><div class="dish__price">19 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Croque-Monsieur de porc confit des Viandes Bio <span>abricots, béchamel, oignons caramélisés, cheddar Saint-Fidèle, servi avec salade verte</span></div><div class="dish__dots"></div><div class="dish__price">21 $</div></li>
+      <li class="dish dish--options reveal">
+        <div class="dish__name">Salade « Retour du Vietnam » <span>vinaigrette Saïgon, copeaux de légumes, ramen, arachides, chutney de mangues, oignons frits</span></div>
+        <div class="dish__dots"></div>
+        <div class="dish__opts">
+          <span class="dish__opt"><em>Sans poulet</em><b>23 $</b></span>
+          <span class="dish__opt"><em>Avec poulet bio</em><b>30 $</b></span>
+        </div>
+      </li>
+      <li class="dish dish--options reveal">
+        <div class="dish__name">Salade à la mode César <span>cœurs de Boston, croûtons, câpres, charcuterie bio, copeaux de Tomme d'Elles</span></div>
+        <div class="dish__dots"></div>
+        <div class="dish__opts">
+          <span class="dish__opt"><em>Sans poulet</em><b>24 $</b></span>
+          <span class="dish__opt"><em>Avec poulet bio</em><b>31 $</b></span>
+        </div>
+      </li>
+      <li class="dish reveal"><div class="dish__name">Fish &amp; Chips maison <span>sauce tartare, salade de chou et frites maison</span></div><div class="dish__dots"></div><div class="dish__price">27 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Orecchiette à l'agneau braisé <span>jus d'agneau, crème, pois verts, champignons de Paris, roquette, parmesan</span></div><div class="dish__dots"></div><div class="dish__price">28 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Pavé de boudin noir <span>purée de pommes de terre, sauce moutarde, choux de Bruxelles frits, salade pommes et roquette</span></div><div class="dish__dots"></div><div class="dish__price">28 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Tartare d'omble de la Gaspésie <span>frites maison</span></div><div class="dish__dots"></div><div class="dish__price">31 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Pièce de bœuf grillé <span>beurre de citron et chorizo bio, salade de chou, frites maison</span></div><div class="dish__dots"></div><div class="dish__price">33 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Planche du Mouton <span>charcuteries des Viandes Bio et maison, sélection de fromages locaux, purée d'abricots et condiments</span></div><div class="dish__dots"></div><div class="dish__price">33 $</div></li>
+    </ul>
+  </section>
+
+  <section class="menu-cat">
+    <h2 class="menu-cat__title split-title"><em>Desserts</em></h2>
+    <ul class="dishes">
+      <li class="dish reveal"><div class="dish__name">Namélaka au chocolat blanc et poivre des dunes <span>fraises de l'Île d'Orléans</span></div><div class="dish__dots"></div><div class="dish__price">10 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Le Légendaire gâteau aux carottes du Mouton</div><div class="dish__dots"></div><div class="dish__price">12 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Panacotta à l'érable <span>crumble d'avoine, confiture de bleuets</span></div><div class="dish__dots"></div><div class="dish__price">10 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Assiette de sorbets maison et fruits de saison <span>deux sorbets</span></div><div class="dish__dots"></div><div class="dish__price">10 $</div></li>
+    </ul>
+  </section>
+</main>
+
+<!-- ============ MENU SOIR ============ -->
+<main class="menu-body is-hidden" id="menu-soir" data-menu-panel="soir">
+  <section class="menu-cat">
+    <h2 class="menu-cat__title split-title"><em>Entrées</em></h2>
+    <ul class="dishes">
+      <li class="dish reveal"><div class="dish__name">Toast de tomates ancestrales bio <span>focaccia artisanale grillée, yogourt glacé au basilic, réduction de balsamique, roquette, tuile de tomme de brebis</span></div><div class="dish__dots"></div><div class="dish__price">16 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Inspiration des rivages du Saint-Laurent <span>moules, crevettes nordiques, tomates, pommes de terre, sauce Romesco aux pistaches, crème soubise au safran, croûtons aux herbes, roquette, vinaigrette au Xérès et Coppa bio</span></div><div class="dish__dots"></div><div class="dish__price">18 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Tempura de champignons Rose &amp; Lions <span>mayonnaise coriandre, roquette, vinaigrette kimchi, gomasio, gel à l'ail noir</span></div><div class="dish__dots"></div><div class="dish__price">18 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Assiette de charcuteries maison <span>moutarde de cassis, betteraves marinées, cornichons maison</span></div><div class="dish__dots"></div><div class="dish__price">18 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Omble de la Gaspésie confit <span>mayonnaise au hareng fumé, poireaux frits et confits, perles de moutarde marinées</span></div><div class="dish__dots"></div><div class="dish__price">18 $</div></li>
+    </ul>
+  </section>
+
+  <section class="menu-cat">
+    <h2 class="menu-cat__title split-title"><em>Plats</em></h2>
+    <ul class="dishes">
+      <li class="dish reveal"><div class="dish__name">Curry de légumes racines et tofu <span>purée de lentilles façon dahl, pain naan, pousses de Saint-Aimé-des-Lacs</span></div><div class="dish__dots"></div><div class="dish__price">35 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Tartare de bœuf <span>façon asiatique, caviar de Mujjol, tempura, concombres, juliennes de légumes, frites et mayonnaise</span></div><div class="dish__dots"></div><div class="dish__price">38 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Cocotte d'épaule de porc des Viandes Bio <span>érable et coriandre, radis, pommes de terre, échalotes, carottes, champignons, pâte feuilletée</span></div><div class="dish__dots"></div><div class="dish__price">39 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Suprême de volaille bio, sauce morilles de feu <span>pommes de terre bleues au pesto de rabioles de chez Guillaume, légumes de saison</span></div><div class="dish__dots"></div><div class="dish__price">41 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Arrivage de la mer <span>au goût des cuisiniers</span></div><div class="dish__dots"></div><div class="dish__price">43 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Canard de La Ferme Basque <span>sauce au gin Saint-Laurent et miel, purée de carottes rôties, pommes de terre Gabrielle confites, carottes marinées et légumes de saison</span></div><div class="dish__dots"></div><div class="dish__price">43 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Poutine de pintade confite du Québec <span>sauce au foie gras de La Ferme Basque, fromage de la Laiterie Charlevoix, pommes de terre Gabrielle, oignons rouges marinés au vinaigre de cassis</span></div><div class="dish__dots"></div><div class="dish__price">43 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Ris de veau et pétoncles <span>purée de céleri-rave, émulsion au verjus de chardonnay Camy, pommes de terre Gabrielle confites, kale frit, légumes de saison</span></div><div class="dish__dots"></div><div class="dish__price">49 $</div></li>
+    </ul>
+  </section>
+
+  <section class="menu-cat">
+    <h2 class="menu-cat__title split-title"><em>Desserts</em></h2>
+    <ul class="dishes">
+      <li class="dish reveal"><div class="dish__name">Crème brûlée à la lavande de notre voisine <span>biscuit sablé</span></div><div class="dish__dots"></div><div class="dish__price">13 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Gâteau aux carottes <span>le légendaire et authentique du Mouton Noir, noix de Grenoble, gel de carottes à l'érable, glaçage au fromage</span></div><div class="dish__dots"></div><div class="dish__price">13 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Ceci n'est pas une tarte au citron <span>argousier, meringue, gel d'Amermelade</span></div><div class="dish__dots"></div><div class="dish__price">13 $</div></li>
+      <li class="dish reveal"><div class="dish__name">Financier au rhum Chic Choc <span>compote de rhubarbe, sorbet fraises et cardamome</span></div><div class="dish__dots"></div><div class="dish__price">13 $</div></li>
+      <li class="dish dish--options reveal">
+        <div class="dish__name">Découverte de fromages d'ici <span>confiture d'abricots, noix rôties aux épices, fruits de saison et séchés</span></div>
+        <div class="dish__dots"></div>
+        <div class="dish__opts">
+          <span class="dish__opt"><em>1 morceau</em><b>8 $</b></span>
+          <span class="dish__opt"><em>2 morceaux</em><b>15 $</b></span>
+          <span class="dish__opt"><em>3 morceaux</em><b>22 $</b></span>
+        </div>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<!-- ============ FOOTNOTE + CTA ============ -->
+<section class="menu-foot">
+  <p class="menu__note reveal">Le menu est sujet à changement sans préavis · taxes et service en sus</p>
+  <a class="btn btn--solid btn--big reveal" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver une table</a>
+</section>
+
+<footer class="footer">
+  <div class="footer__bar">
+    <span>© 2026 Le Mouton Noir</span>
+    <span><a href="index.html">← Retour à l'accueil</a></span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+  // Midi / Soir toggle
+  (() => {
+    const btns = document.querySelectorAll(".menu-toggle__btn");
+    const panels = document.querySelectorAll("[data-menu-panel]");
+    btns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        btns.forEach((b) => { b.classList.toggle("is-active", b === btn); b.setAttribute("aria-selected", b === btn); });
+        panels.forEach((p) => {
+          const show = p.dataset.menuPanel === btn.dataset.menu;
+          p.classList.toggle("is-hidden", !show);
+          if (show) {
+            p.querySelectorAll(".reveal, .split-title").forEach((el) => el.classList.add("is-in"));
+          }
+        });
+        document.querySelector(".menu-toggle").dataset.active = btn.dataset.menu;
+      });
+    });
+  })();
+</script>
+</body>
+</html>
