@@ -50,7 +50,7 @@ Toutes les animations utilisent `--ease-out: cubic-bezier(0.22, 1, 0.36, 1)` sau
   à chaque affichage, les `.reveal`/`.split-title` du panneau sont réinitialisés puis
   ré-affichés avec stagger de **45 ms**.
 - **Filtres catégories** : sections non ciblées → `opacity: 0.14` + `pointer-events: none` (0.45 s).
-- Bouton actif : souligné braise + préfixe `//` qui apparaît.
+- Bouton actif : souligné braise + préfixe `// ` qui apparaît.
 
 ## 6. Ambiance
 

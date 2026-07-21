@@ -7,8 +7,8 @@ Il résume **ce qu'est le site**, **où trouver l'information**, et **comment le
 
 - **Projet** : site vitrine statique (HTML/CSS/JS vanilla, sans build) pour le restaurant **Le Mouton Noir** à Baie-Saint-Paul, Charlevoix (QC, Canada).
 - **Pages** : `index.html` (accueil) + `menu.html` (carte midi/soir).
-- **Design system** : « Braise » — charbon profond, crème, orange braise, sauge. Typo **Archivo** (titres expansés), **Fraunces** italique (accents), **Space Mono** (repères `//01`).
-- **Référence visuelle** : style « Kairo Kitchen » — photo plein écran assombrie, titre géant en capitales expansées qui chevauche l'image, petits blocs de texte en capitales, boutons rectangulaires à bordure fine, liens préfixés `//`.
+- **Design system** : « Braise » — charbon profond, crème, orange braise, sauge. Typo **Archivo** (titres expansés), **Fraunces** italique (accents), **Space Mono** (repères `// 01`).
+- **Référence visuelle** : style « Kairo Kitchen » — photo plein écran assombrie, titre géant en capitales expansées qui chevauche l'image, petits blocs de texte en capitales, boutons rectangulaires à bordure fine, liens préfixés `// `.
 - **Documentation complète** : voir le dossier [`docs/`](./docs/) — tout est dedans pour régénérer le site sur n'importe quelle stack.
 
 ## Structure du dépôt

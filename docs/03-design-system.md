@@ -24,14 +24,14 @@ titre géant expansé, blocs texte en petites capitales, UI rectangulaire).
 |---|---|---|
 | `--display` | **Archivo** (variable `wdth` 62–125) | titres : `font-stretch: 118–125%`, graisse 700–800, **capitales**, `letter-spacing: -0.01em` |
 | `--serif` | **Fraunces** | italique 300 uniquement, pour le mot accent (braise) dans les titres |
-| `--mono` | **Space Mono** | repères `//01`, 0.72rem |
+| `--mono` | **Space Mono** | repères `// 01`, 0.72rem |
 | `--sans` | **Archivo** | texte courant, labels, boutons (graisse 300–500) |
 
 **Règle de composition des titres** : corps en Archivo capitales gras + **un mot en
 Fraunces italique light couleur braise** (ex. « Une table *ancrée* ici », « LA *carte* »).
 
-**Convention `//`** : les libellés techniques sont préfixés de `//` (nav, filtres,
-eyebrows). Les repères de section sont en Space Mono : `//01` … `//05`.
+**Convention `// `** : les libellés techniques sont préfixés de `// ` (nav, filtres,
+eyebrows). Les repères de section sont en Space Mono : `// 01` … `// 05`.
 
 Échelle de titres :
 - Hero : `clamp(3rem, 11.5vw, 11rem)`, `line-height: 0.88`
@@ -90,7 +90,7 @@ eyebrows). Les repères de section sont en Space Mono : `//01` … `//05`.
 
 ### Strip d'infos hero (`.hero__strip`)
 - Grille 4 colonnes (2 × 2 sous 900 px), fond `rgba(13,12,11,0.45)` + blur 12 px, filets internes
-- Cellule = label braise-soft (`//La carte`) + valeur crème ; cellules cliquables (liens)
+- Cellule = label braise-soft (`// La carte`) + valeur crème ; cellules cliquables (liens)
 
 ## 5. Effets globaux
 

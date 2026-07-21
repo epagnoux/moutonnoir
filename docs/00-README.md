@@ -30,7 +30,7 @@ entièrement en français, sans framework ni build step (HTML/CSS/JS vanilla).
 STYLE : inspire-toi du design « Kairo Kitchen » — photo plein écran assombrie,
 titre géant en capitales sans-serif expansées qui chevauche l'image, petits
 blocs de texte en capitales espacées, boutons rectangulaires à bordure fine,
-liens de navigation préfixés « // », repères numérotés « //01 » en monospace.
+liens de navigation préfixés « // », repères numérotés « // 01 » en monospace.
 Ambiance haut de gamme mais détendue, sombre et chaleureuse.
 
 DESIGN SYSTEM « Braise » :
@@ -39,20 +39,20 @@ DESIGN SYSTEM « Braise » :
   filets rgba(240,235,225,0.16).
 - Typo Google Fonts : Archivo (variable wdth 62–125, titres font-stretch 118–125%
   gras 700–800 en capitales), Fraunces italique 300 (mot accent en braise dans
-  les titres), Space Mono (repères //01).
+  les titres), Space Mono (repères // 01).
 - Boutons rectangulaires (pas d'arrondi) avec flèche « → » animée au survol.
 - Grain de film animé en surimpression (opacity 0.06) + curseur personnalisé
   (point braise, blend difference).
 
 ACCUEIL (index.html) :
-1. Nav fixe : logo carré, liens //L'histoire //Terroir //Terrasse //Menu //Infos,
+1. Nav fixe : logo carré, liens // L'histoire // Terroir // Terrasse // Menu // Infos,
    bouton outline « Réserver → » (lien Libro).
 2. Hero plein écran : photo de la terrasse (assets/photo-4.jpg) assombrie
    (brightness .5) avec zoom d'entrée 1.08→1, titre « LE MOUTON » plein +
    « NOIR » en contour (text-stroke) aligné à droite, révélés par masque.
-   En bas, strip d'infos en 4 cellules (fond flouté) : //La carte (lien menu),
-   //Horaires (Mar–Sam 11h30–14h / 17h30–21h), //Adresse (lien Google Maps),
-   //Contact (lien tel:).
+   En bas, strip d'infos en 4 cellules (fond flouté) : // La carte (lien menu),
+   // Horaires (Mar–Sam 11h30–14h / 17h30–21h), // Adresse (lien Google Maps),
+   // Contact (lien tel:).
 3. « 01 // Une table ancrée ici » : texte d'intro léger + 2 photos
    (salle + plat) avec révélation par rideau et tilt 3D au survol.
 4. « 02 // Le terroir, à la table » : 4 cartes (Cuisine de Charlevoix,
@@ -68,7 +68,7 @@ ACCUEIL (index.html) :
 
 MENU (menu.html) :
 - En-tête avec photo de la salle (photo-3.jpg) assombrie, titre « LA carte »,
-  toggle Midi/Soir (pilule coulissante), filtres //Tout //Entrées //Plats //Desserts
+  toggle Midi/Soir (pilule coulissante), filtres // Tout // Entrées // Plats // Desserts
   qui estompent les autres sections.
 - La carte complète et exacte : voir les données (menu midi 7 entrées / 10 plats /
   4 desserts, menu soir 5/8/5). IMPORTANT : respecter les plats à options de prix
