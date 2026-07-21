@@ -7,7 +7,7 @@
 <meta name="description" content="Menu midi et menu soir du Mouton Noir — cuisine de terroir de Charlevoix à Baie-Saint-Paul." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300;62..125,400;62..125,500;62..125,600;62..125,700;62..125,800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="menu-page">
@@ -19,34 +19,41 @@
 <header class="nav is-scrolled" id="nav">
   <a href="index.html" class="nav__brand">
     <img class="nav__logo" src="assets/logo.png" alt="Le Mouton Noir" />
-    <span class="nav__name">Le Mouton&nbsp;Noir</span>
   </a>
   <nav class="nav__links">
-    <a href="index.html#histoire">L'histoire</a>
-    <a href="index.html#terroir">Terroir</a>
-    <a href="index.html#terrasse">Terrasse</a>
-    <a href="menu.html" aria-current="page">Menu</a>
-    <a href="index.html#infos">Infos</a>
+    <a href="index.html#histoire">//L'histoire</a>
+    <a href="index.html#terroir">//Terroir</a>
+    <a href="index.html#terrasse">//Terrasse</a>
+    <a href="menu.html" aria-current="page">//Menu</a>
+    <a href="test.html">//Test 3D</a>
+    <a href="index.html#infos">//Infos</a>
   </nav>
-  <a class="btn btn--solid nav__cta" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver</a>
+  <a class="btn btn--outline nav__cta" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver <span class="btn__arrow">→</span></a>
 </header>
 
 <!-- ============ MENU HEADER ============ -->
 <section class="menu-hero">
-  <p class="hero__eyebrow reveal">Baie-Saint-Paul · Charlevoix</p>
+  <p class="menu-hero__eyebrow reveal">//Baie-Saint-Paul · Charlevoix</p>
   <h1 class="menu-hero__title split-title">La <em>carte</em></h1>
-  <p class="hero__sub reveal">Une cuisine de terroir qui suit les saisons et les artisans de Charlevoix.</p>
+  <p class="menu-hero__sub reveal">Une cuisine de terroir qui suit les saisons et les artisans de Charlevoix.</p>
 
   <div class="menu-toggle reveal" role="tablist" aria-label="Choix du menu">
     <button class="menu-toggle__btn is-active" role="tab" aria-selected="true" data-menu="midi">Menu Midi</button>
     <button class="menu-toggle__btn" role="tab" aria-selected="false" data-menu="soir">Menu Soir</button>
     <span class="menu-toggle__pill" aria-hidden="true"></span>
   </div>
+
+  <div class="menu-filter reveal" aria-label="Filtrer par catégorie">
+    <button class="menu-filter__btn is-active" data-cat="tout">Tout</button>
+    <button class="menu-filter__btn" data-cat="entrees">Entrées</button>
+    <button class="menu-filter__btn" data-cat="plats">Plats</button>
+    <button class="menu-filter__btn" data-cat="desserts">Desserts</button>
+  </div>
 </section>
 
 <!-- ============ MENU MIDI ============ -->
 <main class="menu-body" id="menu-midi" data-menu-panel="midi">
-  <section class="menu-cat">
+  <section class="menu-cat" data-cat="entrees">
     <h2 class="menu-cat__title split-title"><em>Entrées</em></h2>
     <ul class="dishes">
       <li class="dish reveal"><div class="dish__name">Frites et mayo maison</div><div class="dish__dots"></div><div class="dish__price">8 $</div></li>
@@ -59,7 +66,7 @@
     </ul>
   </section>
 
-  <section class="menu-cat">
+  <section class="menu-cat" data-cat="plats">
     <h2 class="menu-cat__title split-title"><em>Plats</em></h2>
     <ul class="dishes">
       <li class="dish reveal"><div class="dish__name">Sandwich de poulet bio confit de Charlevoix <span>mayonnaise à l'estragon, champignons, lardons, salade verte</span></div><div class="dish__dots"></div><div class="dish__price">19 $</div></li>
@@ -89,7 +96,7 @@
     </ul>
   </section>
 
-  <section class="menu-cat">
+  <section class="menu-cat" data-cat="desserts">
     <h2 class="menu-cat__title split-title"><em>Desserts</em></h2>
     <ul class="dishes">
       <li class="dish reveal"><div class="dish__name">Namélaka au chocolat blanc et poivre des dunes <span>fraises de l'Île d'Orléans</span></div><div class="dish__dots"></div><div class="dish__price">10 $</div></li>
@@ -102,7 +109,7 @@
 
 <!-- ============ MENU SOIR ============ -->
 <main class="menu-body is-hidden" id="menu-soir" data-menu-panel="soir">
-  <section class="menu-cat">
+  <section class="menu-cat" data-cat="entrees">
     <h2 class="menu-cat__title split-title"><em>Entrées</em></h2>
     <ul class="dishes">
       <li class="dish reveal"><div class="dish__name">Toast de tomates ancestrales bio <span>focaccia artisanale grillée, yogourt glacé au basilic, réduction de balsamique, roquette, tuile de tomme de brebis</span></div><div class="dish__dots"></div><div class="dish__price">16 $</div></li>
@@ -113,7 +120,7 @@
     </ul>
   </section>
 
-  <section class="menu-cat">
+  <section class="menu-cat" data-cat="plats">
     <h2 class="menu-cat__title split-title"><em>Plats</em></h2>
     <ul class="dishes">
       <li class="dish reveal"><div class="dish__name">Curry de légumes racines et tofu <span>purée de lentilles façon dahl, pain naan, pousses de Saint-Aimé-des-Lacs</span></div><div class="dish__dots"></div><div class="dish__price">35 $</div></li>
@@ -127,7 +134,7 @@
     </ul>
   </section>
 
-  <section class="menu-cat">
+  <section class="menu-cat" data-cat="desserts">
     <h2 class="menu-cat__title split-title"><em>Desserts</em></h2>
     <ul class="dishes">
       <li class="dish reveal"><div class="dish__name">Crème brûlée à la lavande de notre voisine <span>biscuit sablé</span></div><div class="dish__dots"></div><div class="dish__price">13 $</div></li>
@@ -146,6 +153,15 @@
     </ul>
   </section>
 </main>
+
+<!-- ============ STICKY BAR ============ -->
+<div class="menu-bar" aria-hidden="false">
+  <span class="menu-bar__label">//Le Mouton Noir</span>
+  <div class="menu-bar__actions">
+    <a href="#menu-midi" class="menu-bar__link">Menu</a>
+    <a class="btn btn--outline" href="http://widgets.libroreserve.com/WEB/QC015031606046/book" target="_blank" rel="noopener">Réserver <span class="btn__arrow">→</span></a>
+  </div>
+</div>
 
 <!-- ============ FOOTNOTE + CTA ============ -->
 <section class="menu-foot">
@@ -173,12 +189,36 @@
           const show = p.dataset.menuPanel === btn.dataset.menu;
           p.classList.toggle("is-hidden", !show);
           if (show) {
-            p.querySelectorAll(".reveal, .split-title").forEach((el) => el.classList.add("is-in"));
+            // rejoue les animations à chaque bascule
+            p.querySelectorAll(".reveal, .split-title").forEach((el, i) => {
+              el.classList.remove("is-in");
+              setTimeout(() => el.classList.add("is-in"), 40 + i * 45);
+            });
           }
         });
         document.querySelector(".menu-toggle").dataset.active = btn.dataset.menu;
       });
     });
+
+    /* ---------- Filtre par catégorie ---------- */
+    const filterBtns = document.querySelectorAll(".menu-filter__btn");
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach((b) => b.classList.toggle("is-active", b === btn));
+        const cat = btn.dataset.cat;
+        document.querySelectorAll("[data-menu-panel]:not(.is-hidden) .menu-cat").forEach((section) => {
+          section.classList.toggle("is-dimmed", cat !== "tout" && section.dataset.cat !== cat);
+        });
+      });
+    });
+
+    /* ---------- Sticky bar d'actions ---------- */
+    const bar = document.querySelector(".menu-bar");
+    if (bar) {
+      const onScroll = () => bar.classList.toggle("is-visible", window.scrollY > 420);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
   })();
 </script>
 </body>
